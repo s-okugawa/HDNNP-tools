@@ -7,14 +7,13 @@ import pandas as pd
 
 """
 This script is for plotting G1/G2/G4 data of each atom 
-by color bar
+by heatmap
 """
 
 if __name__ == '__main__': 
     root=os.getcwd()
     symfuncfile=root+"/data/CrystalSi64/symmetry_function.npz"
     plotdir=root+"/result/"
-    dngrp=["d2"]
     
     xlb=["G1"]
     ylb=[]
@@ -28,13 +27,13 @@ if __name__ == '__main__':
     symf= np.load(symfuncfile)
     symdata= symf['sym_func']
 
-    smpl0=symdata[10]
+    smpl0=symdata[0]
     df=pd.DataFrame(data=smpl0, index=ylb, columns=xlb)
     
     fig, ax = plt.subplots(figsize=(12, 9)) 
     sns.heatmap(df, cmap='tab20')
     plt.title("CrystalSi64 Symmetry_Function G1/G2/G4 data")
                   
-    plotfile=plotdir+"Gdata-C4.png"
+    plotfile=plotdir+"Gdata-heatmap.png"
     plt.savefig(plotfile)
     plt.close()
